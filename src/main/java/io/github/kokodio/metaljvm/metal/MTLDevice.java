@@ -14,6 +14,7 @@ import java.lang.foreign.MemorySegment;
 import java.lang.foreign.SegmentAllocator;
 import java.lang.invoke.MethodHandle;
 
+import static java.lang.foreign.ValueLayout.ADDRESS;
 import static java.lang.foreign.ValueLayout.JAVA_BOOLEAN;
 import static java.lang.foreign.ValueLayout.JAVA_INT;
 import static java.lang.foreign.ValueLayout.JAVA_LONG;
@@ -224,6 +225,9 @@ public class MTLDevice extends NSObject {
     private static final MethodHandle MH_architecture = ObjC.msgSendCritical(FunctionDescriptor.of(JAVA_LONG, JAVA_LONG, JAVA_LONG));
     private static final long SEL_maxThreadsPerThreadgroup = ObjC.selector("maxThreadsPerThreadgroup");
     private static final MethodHandle MH_maxThreadsPerThreadgroup = ObjC.msgSendCritical(FunctionDescriptor.of(MTLSize.LAYOUT, JAVA_LONG, JAVA_LONG));
+    private static final MethodHandle MH_maxThreadsPerThreadgroupStret = ObjC.hasMsgSendStret()
+            ? ObjC.msgSendStret(FunctionDescriptor.ofVoid(ADDRESS, JAVA_LONG, JAVA_LONG))
+            : null;
     private static final long SEL_isLowPower = ObjC.selector("isLowPower");
     private static final MethodHandle MH_isLowPower = ObjC.msgSendCritical(FunctionDescriptor.of(JAVA_BOOLEAN, JAVA_LONG, JAVA_LONG));
     private static final long SEL_isHeadless = ObjC.selector("isHeadless");
@@ -1744,6 +1748,11 @@ public class MTLDevice extends NSObject {
     /** {@code -[MTLDevice maxThreadsPerThreadgroup]} */
     public MTLSize maxThreadsPerThreadgroup() {
         try (NativeStack stack = NativeStack.push()) {
+            if (ObjC.hasMsgSendStret()) {
+                MemorySegment result = stack.allocate(MTLSize.LAYOUT);
+                MH_maxThreadsPerThreadgroupStret.invokeExact(result, this.handle, SEL_maxThreadsPerThreadgroup);
+                return MTLSize.read(result);
+            }
             return MTLSize.read((MemorySegment) MH_maxThreadsPerThreadgroup.invokeExact((SegmentAllocator) stack, this.handle, SEL_maxThreadsPerThreadgroup));
         } catch (Throwable throwable) {
             throw new AssertionError(throwable);

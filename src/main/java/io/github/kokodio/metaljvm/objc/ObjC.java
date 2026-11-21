@@ -25,6 +25,7 @@ public final class ObjC {
 
     private static final SymbolLookup RUNTIME = SymbolLookup.libraryLookup("/usr/lib/libobjc.A.dylib", Arena.global());
     private static final MemorySegment MSG_SEND = RUNTIME.findOrThrow("objc_msgSend");
+    private static final MemorySegment MSG_SEND_STRET = RUNTIME.find("objc_msgSend_stret").orElse(null);
     private static final MethodHandle OBJC_GET_CLASS =
             LINKER.downcallHandle(RUNTIME.findOrThrow("objc_getClass"), FunctionDescriptor.of(JAVA_LONG, ADDRESS));
     private static final MethodHandle SEL_REGISTER_NAME =
@@ -94,6 +95,26 @@ public final class ObjC {
     /** {@code objc_msgSend} as a critical downcall: fastest, but the call must be short and must not re-enter Java. */
     public static MethodHandle msgSendCritical(FunctionDescriptor descriptor) {
         return LINKER.downcallHandle(MSG_SEND, descriptor, Linker.Option.critical(false));
+    }
+
+    /**
+     * Whether this process exposes the x86_64 {@code objc_msgSend_stret} entry point.
+     * Large struct returns use a hidden first argument on x86_64; arm64 returns them directly.
+     */
+    public static boolean hasMsgSendStret() {
+        return MSG_SEND_STRET != null;
+    }
+
+    /**
+     * {@code objc_msgSend_stret} for a struct return larger than 16 bytes on x86_64.
+     * The first parameter of the descriptor must be the {@link MemorySegment} that receives the result,
+     * followed by the receiver and selector (and then the method arguments).
+     */
+    public static MethodHandle msgSendStret(FunctionDescriptor descriptor) {
+        if (MSG_SEND_STRET == null) {
+            throw new UnsupportedOperationException("objc_msgSend_stret is not available on this platform");
+        }
+        return LINKER.downcallHandle(MSG_SEND_STRET, descriptor, Linker.Option.critical(false));
     }
 
     public static void release(long object) {

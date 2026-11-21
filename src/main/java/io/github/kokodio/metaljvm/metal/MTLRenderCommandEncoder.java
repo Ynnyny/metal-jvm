@@ -61,7 +61,7 @@ public class MTLRenderCommandEncoder extends MTLCommandEncoder {
     private static final long SEL_setVertexAccelerationStructure_atBufferIndex_ = ObjC.selector("setVertexAccelerationStructure:atBufferIndex:");
     private static final MethodHandle MH_setVertexAccelerationStructure_atBufferIndex_ = ObjC.msgSendCritical(FunctionDescriptor.ofVoid(JAVA_LONG, JAVA_LONG, JAVA_LONG, JAVA_LONG));
     private static final long SEL_setViewport_ = ObjC.selector("setViewport:");
-    private static final MethodHandle MH_setViewport_ = ObjC.msgSendCritical(FunctionDescriptor.ofVoid(JAVA_LONG, JAVA_LONG, JAVA_LONG));
+    private static final MethodHandle MH_setViewport_ = ObjC.msgSendCritical(FunctionDescriptor.ofVoid(JAVA_LONG, JAVA_LONG, MTLViewport.LAYOUT));
     private static final long SEL_setViewports_count_ = ObjC.selector("setViewports:count:");
     private static final MethodHandle MH_setViewports_count_ = ObjC.msgSendCritical(FunctionDescriptor.ofVoid(JAVA_LONG, JAVA_LONG, JAVA_LONG, JAVA_LONG));
     private static final long SEL_setFrontFacingWinding_ = ObjC.selector("setFrontFacingWinding:");
@@ -77,7 +77,7 @@ public class MTLRenderCommandEncoder extends MTLCommandEncoder {
     private static final long SEL_setDepthTestMinBound_maxBound_ = ObjC.selector("setDepthTestMinBound:maxBound:");
     private static final MethodHandle MH_setDepthTestMinBound_maxBound_ = ObjC.msgSendCritical(FunctionDescriptor.ofVoid(JAVA_LONG, JAVA_LONG, JAVA_FLOAT, JAVA_FLOAT));
     private static final long SEL_setScissorRect_ = ObjC.selector("setScissorRect:");
-    private static final MethodHandle MH_setScissorRect_ = ObjC.msgSendCritical(FunctionDescriptor.ofVoid(JAVA_LONG, JAVA_LONG, JAVA_LONG));
+    private static final MethodHandle MH_setScissorRect_ = ObjC.msgSendCritical(FunctionDescriptor.ofVoid(JAVA_LONG, JAVA_LONG, MTLScissorRect.LAYOUT));
     private static final long SEL_setScissorRects_count_ = ObjC.selector("setScissorRects:count:");
     private static final MethodHandle MH_setScissorRects_count_ = ObjC.msgSendCritical(FunctionDescriptor.ofVoid(JAVA_LONG, JAVA_LONG, JAVA_LONG, JAVA_LONG));
     private static final long SEL_setTriangleFillMode_ = ObjC.selector("setTriangleFillMode:");
@@ -470,7 +470,7 @@ public class MTLRenderCommandEncoder extends MTLCommandEncoder {
     /** {@code -[MTLRenderCommandEncoder setViewport:]} */
     public void setViewport(final MTLViewport viewport) {
         try (NativeStack stack = NativeStack.push()) {
-            MH_setViewport_.invokeExact(this.handle, SEL_setViewport_, viewport.on(stack).address());
+            MH_setViewport_.invokeExact(this.handle, SEL_setViewport_, viewport.on(stack));
         } catch (Throwable throwable) {
             throw new AssertionError(throwable);
         }
@@ -542,7 +542,7 @@ public class MTLRenderCommandEncoder extends MTLCommandEncoder {
     /** {@code -[MTLRenderCommandEncoder setScissorRect:]} */
     public void setScissorRect(final MTLScissorRect rect) {
         try (NativeStack stack = NativeStack.push()) {
-            MH_setScissorRect_.invokeExact(this.handle, SEL_setScissorRect_, rect.on(stack).address());
+            MH_setScissorRect_.invokeExact(this.handle, SEL_setScissorRect_, rect.on(stack));
         } catch (Throwable throwable) {
             throw new AssertionError(throwable);
         }

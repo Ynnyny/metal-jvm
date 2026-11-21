@@ -21,13 +21,13 @@ import static java.lang.foreign.ValueLayout.JAVA_LONG;
  */
 public class MTLTexture extends MTLResource {
     private static final long SEL_getBytes_bytesPerRow_bytesPerImage_fromRegion_mipmapLevel_slice_ = ObjC.selector("getBytes:bytesPerRow:bytesPerImage:fromRegion:mipmapLevel:slice:");
-    private static final MethodHandle MH_getBytes_bytesPerRow_bytesPerImage_fromRegion_mipmapLevel_slice_ = ObjC.msgSendCritical(FunctionDescriptor.ofVoid(JAVA_LONG, JAVA_LONG, JAVA_LONG, JAVA_LONG, JAVA_LONG, JAVA_LONG, JAVA_LONG, JAVA_LONG));
+    private static final MethodHandle MH_getBytes_bytesPerRow_bytesPerImage_fromRegion_mipmapLevel_slice_ = ObjC.msgSendCritical(FunctionDescriptor.ofVoid(JAVA_LONG, JAVA_LONG, JAVA_LONG, JAVA_LONG, JAVA_LONG, MTLRegion.LAYOUT, JAVA_LONG, JAVA_LONG));
     private static final long SEL_replaceRegion_mipmapLevel_slice_withBytes_bytesPerRow_bytesPerImage_ = ObjC.selector("replaceRegion:mipmapLevel:slice:withBytes:bytesPerRow:bytesPerImage:");
-    private static final MethodHandle MH_replaceRegion_mipmapLevel_slice_withBytes_bytesPerRow_bytesPerImage_ = ObjC.msgSendCritical(FunctionDescriptor.ofVoid(JAVA_LONG, JAVA_LONG, JAVA_LONG, JAVA_LONG, JAVA_LONG, JAVA_LONG, JAVA_LONG, JAVA_LONG));
+    private static final MethodHandle MH_replaceRegion_mipmapLevel_slice_withBytes_bytesPerRow_bytesPerImage_ = ObjC.msgSendCritical(FunctionDescriptor.ofVoid(JAVA_LONG, JAVA_LONG, MTLRegion.LAYOUT, JAVA_LONG, JAVA_LONG, JAVA_LONG, JAVA_LONG, JAVA_LONG));
     private static final long SEL_getBytes_bytesPerRow_fromRegion_mipmapLevel_ = ObjC.selector("getBytes:bytesPerRow:fromRegion:mipmapLevel:");
-    private static final MethodHandle MH_getBytes_bytesPerRow_fromRegion_mipmapLevel_ = ObjC.msgSendCritical(FunctionDescriptor.ofVoid(JAVA_LONG, JAVA_LONG, JAVA_LONG, JAVA_LONG, JAVA_LONG, JAVA_LONG));
+    private static final MethodHandle MH_getBytes_bytesPerRow_fromRegion_mipmapLevel_ = ObjC.msgSendCritical(FunctionDescriptor.ofVoid(JAVA_LONG, JAVA_LONG, JAVA_LONG, JAVA_LONG, MTLRegion.LAYOUT, JAVA_LONG));
     private static final long SEL_replaceRegion_mipmapLevel_withBytes_bytesPerRow_ = ObjC.selector("replaceRegion:mipmapLevel:withBytes:bytesPerRow:");
-    private static final MethodHandle MH_replaceRegion_mipmapLevel_withBytes_bytesPerRow_ = ObjC.msgSendCritical(FunctionDescriptor.ofVoid(JAVA_LONG, JAVA_LONG, JAVA_LONG, JAVA_LONG, JAVA_LONG, JAVA_LONG));
+    private static final MethodHandle MH_replaceRegion_mipmapLevel_withBytes_bytesPerRow_ = ObjC.msgSendCritical(FunctionDescriptor.ofVoid(JAVA_LONG, JAVA_LONG, MTLRegion.LAYOUT, JAVA_LONG, JAVA_LONG, JAVA_LONG));
     private static final long SEL_newTextureViewWithPixelFormat_ = ObjC.selector("newTextureViewWithPixelFormat:");
     private static final MethodHandle MH_newTextureViewWithPixelFormat_ = ObjC.msgSend(FunctionDescriptor.of(JAVA_LONG, JAVA_LONG, JAVA_LONG, JAVA_LONG));
     private static final long SEL_newTextureViewWithPixelFormat_textureType_levels_slices_ = ObjC.selector("newTextureViewWithPixelFormat:textureType:levels:slices:");
@@ -108,7 +108,7 @@ public class MTLTexture extends MTLResource {
     /** {@code -[MTLTexture getBytes:bytesPerRow:bytesPerImage:fromRegion:mipmapLevel:slice:]} */
     public void getBytes(final MemorySegment pixelBytes, final long bytesPerRow, final long bytesPerImage, final MTLRegion region, final long level, final long slice) {
         try (NativeStack stack = NativeStack.push()) {
-            MH_getBytes_bytesPerRow_bytesPerImage_fromRegion_mipmapLevel_slice_.invokeExact(this.handle, SEL_getBytes_bytesPerRow_bytesPerImage_fromRegion_mipmapLevel_slice_, pixelBytes.address(), bytesPerRow, bytesPerImage, region.on(stack).address(), level, slice);
+            MH_getBytes_bytesPerRow_bytesPerImage_fromRegion_mipmapLevel_slice_.invokeExact(this.handle, SEL_getBytes_bytesPerRow_bytesPerImage_fromRegion_mipmapLevel_slice_, pixelBytes.address(), bytesPerRow, bytesPerImage, region.on(stack), level, slice);
         } catch (Throwable throwable) {
             throw new AssertionError(throwable);
         }
@@ -117,7 +117,7 @@ public class MTLTexture extends MTLResource {
     /** {@code -[MTLTexture replaceRegion:mipmapLevel:slice:withBytes:bytesPerRow:bytesPerImage:]} */
     public void replaceRegion(final MTLRegion region, final long level, final long slice, final MemorySegment pixelBytes, final long bytesPerRow, final long bytesPerImage) {
         try (NativeStack stack = NativeStack.push()) {
-            MH_replaceRegion_mipmapLevel_slice_withBytes_bytesPerRow_bytesPerImage_.invokeExact(this.handle, SEL_replaceRegion_mipmapLevel_slice_withBytes_bytesPerRow_bytesPerImage_, region.on(stack).address(), level, slice, pixelBytes.address(), bytesPerRow, bytesPerImage);
+            MH_replaceRegion_mipmapLevel_slice_withBytes_bytesPerRow_bytesPerImage_.invokeExact(this.handle, SEL_replaceRegion_mipmapLevel_slice_withBytes_bytesPerRow_bytesPerImage_, region.on(stack), level, slice, pixelBytes.address(), bytesPerRow, bytesPerImage);
         } catch (Throwable throwable) {
             throw new AssertionError(throwable);
         }
@@ -126,7 +126,7 @@ public class MTLTexture extends MTLResource {
     /** {@code -[MTLTexture getBytes:bytesPerRow:fromRegion:mipmapLevel:]} */
     public void getBytes(final MemorySegment pixelBytes, final long bytesPerRow, final MTLRegion region, final long level) {
         try (NativeStack stack = NativeStack.push()) {
-            MH_getBytes_bytesPerRow_fromRegion_mipmapLevel_.invokeExact(this.handle, SEL_getBytes_bytesPerRow_fromRegion_mipmapLevel_, pixelBytes.address(), bytesPerRow, region.on(stack).address(), level);
+            MH_getBytes_bytesPerRow_fromRegion_mipmapLevel_.invokeExact(this.handle, SEL_getBytes_bytesPerRow_fromRegion_mipmapLevel_, pixelBytes.address(), bytesPerRow, region.on(stack), level);
         } catch (Throwable throwable) {
             throw new AssertionError(throwable);
         }
@@ -135,7 +135,7 @@ public class MTLTexture extends MTLResource {
     /** {@code -[MTLTexture replaceRegion:mipmapLevel:withBytes:bytesPerRow:]} */
     public void replaceRegion(final MTLRegion region, final long level, final MemorySegment pixelBytes, final long bytesPerRow) {
         try (NativeStack stack = NativeStack.push()) {
-            MH_replaceRegion_mipmapLevel_withBytes_bytesPerRow_.invokeExact(this.handle, SEL_replaceRegion_mipmapLevel_withBytes_bytesPerRow_, region.on(stack).address(), level, pixelBytes.address(), bytesPerRow);
+            MH_replaceRegion_mipmapLevel_withBytes_bytesPerRow_.invokeExact(this.handle, SEL_replaceRegion_mipmapLevel_withBytes_bytesPerRow_, region.on(stack), level, pixelBytes.address(), bytesPerRow);
         } catch (Throwable throwable) {
             throw new AssertionError(throwable);
         }

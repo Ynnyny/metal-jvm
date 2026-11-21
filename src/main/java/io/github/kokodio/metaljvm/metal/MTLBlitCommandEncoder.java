@@ -21,15 +21,15 @@ public class MTLBlitCommandEncoder extends MTLCommandEncoder {
     private static final long SEL_synchronizeTexture_slice_level_ = ObjC.selector("synchronizeTexture:slice:level:");
     private static final MethodHandle MH_synchronizeTexture_slice_level_ = ObjC.msgSendCritical(FunctionDescriptor.ofVoid(JAVA_LONG, JAVA_LONG, JAVA_LONG, JAVA_LONG, JAVA_LONG));
     private static final long SEL_copyFromTexture_sourceSlice_sourceLevel_sourceOrigin_sourceSize_toTexture_destinationSlice_destinationLevel_destinationOrigin_ = ObjC.selector("copyFromTexture:sourceSlice:sourceLevel:sourceOrigin:sourceSize:toTexture:destinationSlice:destinationLevel:destinationOrigin:");
-    private static final MethodHandle MH_copyFromTexture_sourceSlice_sourceLevel_sourceOrigin_sourceSize_toTexture_destinationSlice_destinationLevel_destinationOrigin_ = ObjC.msgSendCritical(FunctionDescriptor.ofVoid(JAVA_LONG, JAVA_LONG, JAVA_LONG, JAVA_LONG, JAVA_LONG, JAVA_LONG, JAVA_LONG, JAVA_LONG, JAVA_LONG, JAVA_LONG, JAVA_LONG));
+    private static final MethodHandle MH_copyFromTexture_sourceSlice_sourceLevel_sourceOrigin_sourceSize_toTexture_destinationSlice_destinationLevel_destinationOrigin_ = ObjC.msgSendCritical(FunctionDescriptor.ofVoid(JAVA_LONG, JAVA_LONG, JAVA_LONG, JAVA_LONG, JAVA_LONG, MTLOrigin.LAYOUT, MTLSize.LAYOUT, JAVA_LONG, JAVA_LONG, JAVA_LONG, MTLOrigin.LAYOUT));
     private static final long SEL_copyFromBuffer_sourceOffset_sourceBytesPerRow_sourceBytesPerImage_sourceSize_toTexture_destinationSlice_destinationLevel_destinationOrigin_ = ObjC.selector("copyFromBuffer:sourceOffset:sourceBytesPerRow:sourceBytesPerImage:sourceSize:toTexture:destinationSlice:destinationLevel:destinationOrigin:");
-    private static final MethodHandle MH_copyFromBuffer_sourceOffset_sourceBytesPerRow_sourceBytesPerImage_sourceSize_toTexture_destinationSlice_destinationLevel_destinationOrigin_ = ObjC.msgSendCritical(FunctionDescriptor.ofVoid(JAVA_LONG, JAVA_LONG, JAVA_LONG, JAVA_LONG, JAVA_LONG, JAVA_LONG, JAVA_LONG, JAVA_LONG, JAVA_LONG, JAVA_LONG, JAVA_LONG));
+    private static final MethodHandle MH_copyFromBuffer_sourceOffset_sourceBytesPerRow_sourceBytesPerImage_sourceSize_toTexture_destinationSlice_destinationLevel_destinationOrigin_ = ObjC.msgSendCritical(FunctionDescriptor.ofVoid(JAVA_LONG, JAVA_LONG, JAVA_LONG, JAVA_LONG, JAVA_LONG, JAVA_LONG, MTLSize.LAYOUT, JAVA_LONG, JAVA_LONG, JAVA_LONG, MTLOrigin.LAYOUT));
     private static final long SEL_copyFromBuffer_sourceOffset_sourceBytesPerRow_sourceBytesPerImage_sourceSize_toTexture_destinationSlice_destinationLevel_destinationOrigin_options_ = ObjC.selector("copyFromBuffer:sourceOffset:sourceBytesPerRow:sourceBytesPerImage:sourceSize:toTexture:destinationSlice:destinationLevel:destinationOrigin:options:");
-    private static final MethodHandle MH_copyFromBuffer_sourceOffset_sourceBytesPerRow_sourceBytesPerImage_sourceSize_toTexture_destinationSlice_destinationLevel_destinationOrigin_options_ = ObjC.msgSendCritical(FunctionDescriptor.ofVoid(JAVA_LONG, JAVA_LONG, JAVA_LONG, JAVA_LONG, JAVA_LONG, JAVA_LONG, JAVA_LONG, JAVA_LONG, JAVA_LONG, JAVA_LONG, JAVA_LONG, JAVA_LONG));
+    private static final MethodHandle MH_copyFromBuffer_sourceOffset_sourceBytesPerRow_sourceBytesPerImage_sourceSize_toTexture_destinationSlice_destinationLevel_destinationOrigin_options_ = ObjC.msgSendCritical(FunctionDescriptor.ofVoid(JAVA_LONG, JAVA_LONG, JAVA_LONG, JAVA_LONG, JAVA_LONG, JAVA_LONG, MTLSize.LAYOUT, JAVA_LONG, JAVA_LONG, JAVA_LONG, MTLOrigin.LAYOUT, JAVA_LONG));
     private static final long SEL_copyFromTexture_sourceSlice_sourceLevel_sourceOrigin_sourceSize_toBuffer_destinationOffset_destinationBytesPerRow_destinationBytesPerImage_ = ObjC.selector("copyFromTexture:sourceSlice:sourceLevel:sourceOrigin:sourceSize:toBuffer:destinationOffset:destinationBytesPerRow:destinationBytesPerImage:");
-    private static final MethodHandle MH_copyFromTexture_sourceSlice_sourceLevel_sourceOrigin_sourceSize_toBuffer_destinationOffset_destinationBytesPerRow_destinationBytesPerImage_ = ObjC.msgSendCritical(FunctionDescriptor.ofVoid(JAVA_LONG, JAVA_LONG, JAVA_LONG, JAVA_LONG, JAVA_LONG, JAVA_LONG, JAVA_LONG, JAVA_LONG, JAVA_LONG, JAVA_LONG, JAVA_LONG));
+    private static final MethodHandle MH_copyFromTexture_sourceSlice_sourceLevel_sourceOrigin_sourceSize_toBuffer_destinationOffset_destinationBytesPerRow_destinationBytesPerImage_ = ObjC.msgSendCritical(FunctionDescriptor.ofVoid(JAVA_LONG, JAVA_LONG, JAVA_LONG, JAVA_LONG, JAVA_LONG, MTLOrigin.LAYOUT, MTLSize.LAYOUT, JAVA_LONG, JAVA_LONG, JAVA_LONG, JAVA_LONG));
     private static final long SEL_copyFromTexture_sourceSlice_sourceLevel_sourceOrigin_sourceSize_toBuffer_destinationOffset_destinationBytesPerRow_destinationBytesPerImage_options_ = ObjC.selector("copyFromTexture:sourceSlice:sourceLevel:sourceOrigin:sourceSize:toBuffer:destinationOffset:destinationBytesPerRow:destinationBytesPerImage:options:");
-    private static final MethodHandle MH_copyFromTexture_sourceSlice_sourceLevel_sourceOrigin_sourceSize_toBuffer_destinationOffset_destinationBytesPerRow_destinationBytesPerImage_options_ = ObjC.msgSendCritical(FunctionDescriptor.ofVoid(JAVA_LONG, JAVA_LONG, JAVA_LONG, JAVA_LONG, JAVA_LONG, JAVA_LONG, JAVA_LONG, JAVA_LONG, JAVA_LONG, JAVA_LONG, JAVA_LONG, JAVA_LONG));
+    private static final MethodHandle MH_copyFromTexture_sourceSlice_sourceLevel_sourceOrigin_sourceSize_toBuffer_destinationOffset_destinationBytesPerRow_destinationBytesPerImage_options_ = ObjC.msgSendCritical(FunctionDescriptor.ofVoid(JAVA_LONG, JAVA_LONG, JAVA_LONG, JAVA_LONG, JAVA_LONG, MTLOrigin.LAYOUT, MTLSize.LAYOUT, JAVA_LONG, JAVA_LONG, JAVA_LONG, JAVA_LONG, JAVA_LONG));
     private static final long SEL_generateMipmapsForTexture_ = ObjC.selector("generateMipmapsForTexture:");
     private static final MethodHandle MH_generateMipmapsForTexture_ = ObjC.msgSendCritical(FunctionDescriptor.ofVoid(JAVA_LONG, JAVA_LONG, JAVA_LONG));
     private static final long SEL_fillBuffer_range_value_ = ObjC.selector("fillBuffer:range:value:");
@@ -45,9 +45,9 @@ public class MTLBlitCommandEncoder extends MTLCommandEncoder {
     private static final long SEL_waitForFence_ = ObjC.selector("waitForFence:");
     private static final MethodHandle MH_waitForFence_ = ObjC.msgSend(FunctionDescriptor.ofVoid(JAVA_LONG, JAVA_LONG, JAVA_LONG));
     private static final long SEL_getTextureAccessCounters_region_mipLevel_slice_resetCounters_countersBuffer_countersBufferOffset_ = ObjC.selector("getTextureAccessCounters:region:mipLevel:slice:resetCounters:countersBuffer:countersBufferOffset:");
-    private static final MethodHandle MH_getTextureAccessCounters_region_mipLevel_slice_resetCounters_countersBuffer_countersBufferOffset_ = ObjC.msgSendCritical(FunctionDescriptor.ofVoid(JAVA_LONG, JAVA_LONG, JAVA_LONG, JAVA_LONG, JAVA_LONG, JAVA_LONG, JAVA_BOOLEAN, JAVA_LONG, JAVA_LONG));
+    private static final MethodHandle MH_getTextureAccessCounters_region_mipLevel_slice_resetCounters_countersBuffer_countersBufferOffset_ = ObjC.msgSendCritical(FunctionDescriptor.ofVoid(JAVA_LONG, JAVA_LONG, JAVA_LONG, MTLRegion.LAYOUT, JAVA_LONG, JAVA_LONG, JAVA_BOOLEAN, JAVA_LONG, JAVA_LONG));
     private static final long SEL_resetTextureAccessCounters_region_mipLevel_slice_ = ObjC.selector("resetTextureAccessCounters:region:mipLevel:slice:");
-    private static final MethodHandle MH_resetTextureAccessCounters_region_mipLevel_slice_ = ObjC.msgSendCritical(FunctionDescriptor.ofVoid(JAVA_LONG, JAVA_LONG, JAVA_LONG, JAVA_LONG, JAVA_LONG, JAVA_LONG));
+    private static final MethodHandle MH_resetTextureAccessCounters_region_mipLevel_slice_ = ObjC.msgSendCritical(FunctionDescriptor.ofVoid(JAVA_LONG, JAVA_LONG, JAVA_LONG, MTLRegion.LAYOUT, JAVA_LONG, JAVA_LONG));
     private static final long SEL_optimizeContentsForGPUAccess_ = ObjC.selector("optimizeContentsForGPUAccess:");
     private static final MethodHandle MH_optimizeContentsForGPUAccess_ = ObjC.msgSendCritical(FunctionDescriptor.ofVoid(JAVA_LONG, JAVA_LONG, JAVA_LONG));
     private static final long SEL_optimizeContentsForGPUAccess_slice_level_ = ObjC.selector("optimizeContentsForGPUAccess:slice:level:");
@@ -96,7 +96,7 @@ public class MTLBlitCommandEncoder extends MTLCommandEncoder {
     /** {@code -[MTLBlitCommandEncoder copyFromTexture:sourceSlice:sourceLevel:sourceOrigin:sourceSize:toTexture:destinationSlice:destinationLevel:destinationOrigin:]} */
     public void copyFromTexture(final MTLTexture sourceTexture, final long sourceSlice, final long sourceLevel, final MTLOrigin sourceOrigin, final MTLSize sourceSize, final MTLTexture destinationTexture, final long destinationSlice, final long destinationLevel, final MTLOrigin destinationOrigin) {
         try (NativeStack stack = NativeStack.push()) {
-            MH_copyFromTexture_sourceSlice_sourceLevel_sourceOrigin_sourceSize_toTexture_destinationSlice_destinationLevel_destinationOrigin_.invokeExact(this.handle, SEL_copyFromTexture_sourceSlice_sourceLevel_sourceOrigin_sourceSize_toTexture_destinationSlice_destinationLevel_destinationOrigin_, sourceTexture.handle(), sourceSlice, sourceLevel, sourceOrigin.on(stack).address(), sourceSize.on(stack).address(), destinationTexture.handle(), destinationSlice, destinationLevel, destinationOrigin.on(stack).address());
+            MH_copyFromTexture_sourceSlice_sourceLevel_sourceOrigin_sourceSize_toTexture_destinationSlice_destinationLevel_destinationOrigin_.invokeExact(this.handle, SEL_copyFromTexture_sourceSlice_sourceLevel_sourceOrigin_sourceSize_toTexture_destinationSlice_destinationLevel_destinationOrigin_, sourceTexture.handle(), sourceSlice, sourceLevel, sourceOrigin.on(stack), sourceSize.on(stack), destinationTexture.handle(), destinationSlice, destinationLevel, destinationOrigin.on(stack));
         } catch (Throwable throwable) {
             throw new AssertionError(throwable);
         }
@@ -105,7 +105,7 @@ public class MTLBlitCommandEncoder extends MTLCommandEncoder {
     /** {@code -[MTLBlitCommandEncoder copyFromBuffer:sourceOffset:sourceBytesPerRow:sourceBytesPerImage:sourceSize:toTexture:destinationSlice:destinationLevel:destinationOrigin:]} */
     public void copyFromBuffer(final MTLBuffer sourceBuffer, final long sourceOffset, final long sourceBytesPerRow, final long sourceBytesPerImage, final MTLSize sourceSize, final MTLTexture destinationTexture, final long destinationSlice, final long destinationLevel, final MTLOrigin destinationOrigin) {
         try (NativeStack stack = NativeStack.push()) {
-            MH_copyFromBuffer_sourceOffset_sourceBytesPerRow_sourceBytesPerImage_sourceSize_toTexture_destinationSlice_destinationLevel_destinationOrigin_.invokeExact(this.handle, SEL_copyFromBuffer_sourceOffset_sourceBytesPerRow_sourceBytesPerImage_sourceSize_toTexture_destinationSlice_destinationLevel_destinationOrigin_, sourceBuffer.handle(), sourceOffset, sourceBytesPerRow, sourceBytesPerImage, sourceSize.on(stack).address(), destinationTexture.handle(), destinationSlice, destinationLevel, destinationOrigin.on(stack).address());
+            MH_copyFromBuffer_sourceOffset_sourceBytesPerRow_sourceBytesPerImage_sourceSize_toTexture_destinationSlice_destinationLevel_destinationOrigin_.invokeExact(this.handle, SEL_copyFromBuffer_sourceOffset_sourceBytesPerRow_sourceBytesPerImage_sourceSize_toTexture_destinationSlice_destinationLevel_destinationOrigin_, sourceBuffer.handle(), sourceOffset, sourceBytesPerRow, sourceBytesPerImage, sourceSize.on(stack), destinationTexture.handle(), destinationSlice, destinationLevel, destinationOrigin.on(stack));
         } catch (Throwable throwable) {
             throw new AssertionError(throwable);
         }
@@ -118,7 +118,7 @@ public class MTLBlitCommandEncoder extends MTLCommandEncoder {
      */
     public void copyFromBuffer(final MTLBuffer sourceBuffer, final long sourceOffset, final long sourceBytesPerRow, final long sourceBytesPerImage, final MTLSize sourceSize, final MTLTexture destinationTexture, final long destinationSlice, final long destinationLevel, final MTLOrigin destinationOrigin, final long options) {
         try (NativeStack stack = NativeStack.push()) {
-            MH_copyFromBuffer_sourceOffset_sourceBytesPerRow_sourceBytesPerImage_sourceSize_toTexture_destinationSlice_destinationLevel_destinationOrigin_options_.invokeExact(this.handle, SEL_copyFromBuffer_sourceOffset_sourceBytesPerRow_sourceBytesPerImage_sourceSize_toTexture_destinationSlice_destinationLevel_destinationOrigin_options_, sourceBuffer.handle(), sourceOffset, sourceBytesPerRow, sourceBytesPerImage, sourceSize.on(stack).address(), destinationTexture.handle(), destinationSlice, destinationLevel, destinationOrigin.on(stack).address(), options);
+            MH_copyFromBuffer_sourceOffset_sourceBytesPerRow_sourceBytesPerImage_sourceSize_toTexture_destinationSlice_destinationLevel_destinationOrigin_options_.invokeExact(this.handle, SEL_copyFromBuffer_sourceOffset_sourceBytesPerRow_sourceBytesPerImage_sourceSize_toTexture_destinationSlice_destinationLevel_destinationOrigin_options_, sourceBuffer.handle(), sourceOffset, sourceBytesPerRow, sourceBytesPerImage, sourceSize.on(stack), destinationTexture.handle(), destinationSlice, destinationLevel, destinationOrigin.on(stack), options);
         } catch (Throwable throwable) {
             throw new AssertionError(throwable);
         }
@@ -127,7 +127,7 @@ public class MTLBlitCommandEncoder extends MTLCommandEncoder {
     /** {@code -[MTLBlitCommandEncoder copyFromTexture:sourceSlice:sourceLevel:sourceOrigin:sourceSize:toBuffer:destinationOffset:destinationBytesPerRow:destinationBytesPerImage:]} */
     public void copyFromTexture(final MTLTexture sourceTexture, final long sourceSlice, final long sourceLevel, final MTLOrigin sourceOrigin, final MTLSize sourceSize, final MTLBuffer destinationBuffer, final long destinationOffset, final long destinationBytesPerRow, final long destinationBytesPerImage) {
         try (NativeStack stack = NativeStack.push()) {
-            MH_copyFromTexture_sourceSlice_sourceLevel_sourceOrigin_sourceSize_toBuffer_destinationOffset_destinationBytesPerRow_destinationBytesPerImage_.invokeExact(this.handle, SEL_copyFromTexture_sourceSlice_sourceLevel_sourceOrigin_sourceSize_toBuffer_destinationOffset_destinationBytesPerRow_destinationBytesPerImage_, sourceTexture.handle(), sourceSlice, sourceLevel, sourceOrigin.on(stack).address(), sourceSize.on(stack).address(), destinationBuffer.handle(), destinationOffset, destinationBytesPerRow, destinationBytesPerImage);
+            MH_copyFromTexture_sourceSlice_sourceLevel_sourceOrigin_sourceSize_toBuffer_destinationOffset_destinationBytesPerRow_destinationBytesPerImage_.invokeExact(this.handle, SEL_copyFromTexture_sourceSlice_sourceLevel_sourceOrigin_sourceSize_toBuffer_destinationOffset_destinationBytesPerRow_destinationBytesPerImage_, sourceTexture.handle(), sourceSlice, sourceLevel, sourceOrigin.on(stack), sourceSize.on(stack), destinationBuffer.handle(), destinationOffset, destinationBytesPerRow, destinationBytesPerImage);
         } catch (Throwable throwable) {
             throw new AssertionError(throwable);
         }
@@ -140,7 +140,7 @@ public class MTLBlitCommandEncoder extends MTLCommandEncoder {
      */
     public void copyFromTexture(final MTLTexture sourceTexture, final long sourceSlice, final long sourceLevel, final MTLOrigin sourceOrigin, final MTLSize sourceSize, final MTLBuffer destinationBuffer, final long destinationOffset, final long destinationBytesPerRow, final long destinationBytesPerImage, final long options) {
         try (NativeStack stack = NativeStack.push()) {
-            MH_copyFromTexture_sourceSlice_sourceLevel_sourceOrigin_sourceSize_toBuffer_destinationOffset_destinationBytesPerRow_destinationBytesPerImage_options_.invokeExact(this.handle, SEL_copyFromTexture_sourceSlice_sourceLevel_sourceOrigin_sourceSize_toBuffer_destinationOffset_destinationBytesPerRow_destinationBytesPerImage_options_, sourceTexture.handle(), sourceSlice, sourceLevel, sourceOrigin.on(stack).address(), sourceSize.on(stack).address(), destinationBuffer.handle(), destinationOffset, destinationBytesPerRow, destinationBytesPerImage, options);
+            MH_copyFromTexture_sourceSlice_sourceLevel_sourceOrigin_sourceSize_toBuffer_destinationOffset_destinationBytesPerRow_destinationBytesPerImage_options_.invokeExact(this.handle, SEL_copyFromTexture_sourceSlice_sourceLevel_sourceOrigin_sourceSize_toBuffer_destinationOffset_destinationBytesPerRow_destinationBytesPerImage_options_, sourceTexture.handle(), sourceSlice, sourceLevel, sourceOrigin.on(stack), sourceSize.on(stack), destinationBuffer.handle(), destinationOffset, destinationBytesPerRow, destinationBytesPerImage, options);
         } catch (Throwable throwable) {
             throw new AssertionError(throwable);
         }
@@ -212,7 +212,7 @@ public class MTLBlitCommandEncoder extends MTLCommandEncoder {
     /** {@code -[MTLBlitCommandEncoder getTextureAccessCounters:region:mipLevel:slice:resetCounters:countersBuffer:countersBufferOffset:]} */
     public void getTextureAccessCounters(final MTLTexture texture, final MTLRegion region, final long mipLevel, final long slice, final boolean resetCounters, final MTLBuffer countersBuffer, final long countersBufferOffset) {
         try (NativeStack stack = NativeStack.push()) {
-            MH_getTextureAccessCounters_region_mipLevel_slice_resetCounters_countersBuffer_countersBufferOffset_.invokeExact(this.handle, SEL_getTextureAccessCounters_region_mipLevel_slice_resetCounters_countersBuffer_countersBufferOffset_, texture.handle(), region.on(stack).address(), mipLevel, slice, resetCounters, countersBuffer.handle(), countersBufferOffset);
+            MH_getTextureAccessCounters_region_mipLevel_slice_resetCounters_countersBuffer_countersBufferOffset_.invokeExact(this.handle, SEL_getTextureAccessCounters_region_mipLevel_slice_resetCounters_countersBuffer_countersBufferOffset_, texture.handle(), region.on(stack), mipLevel, slice, resetCounters, countersBuffer.handle(), countersBufferOffset);
         } catch (Throwable throwable) {
             throw new AssertionError(throwable);
         }
@@ -221,7 +221,7 @@ public class MTLBlitCommandEncoder extends MTLCommandEncoder {
     /** {@code -[MTLBlitCommandEncoder resetTextureAccessCounters:region:mipLevel:slice:]} */
     public void resetTextureAccessCounters(final MTLTexture texture, final MTLRegion region, final long mipLevel, final long slice) {
         try (NativeStack stack = NativeStack.push()) {
-            MH_resetTextureAccessCounters_region_mipLevel_slice_.invokeExact(this.handle, SEL_resetTextureAccessCounters_region_mipLevel_slice_, texture.handle(), region.on(stack).address(), mipLevel, slice);
+            MH_resetTextureAccessCounters_region_mipLevel_slice_.invokeExact(this.handle, SEL_resetTextureAccessCounters_region_mipLevel_slice_, texture.handle(), region.on(stack), mipLevel, slice);
         } catch (Throwable throwable) {
             throw new AssertionError(throwable);
         }
