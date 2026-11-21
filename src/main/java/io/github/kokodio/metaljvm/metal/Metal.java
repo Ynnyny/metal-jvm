@@ -5,11 +5,13 @@ import io.github.kokodio.metaljvm.foundation.NSObject;
 import io.github.kokodio.metaljvm.objc.ObjC;
 import org.jspecify.annotations.Nullable;
 
+import java.lang.foreign.Arena;
 import java.lang.foreign.FunctionDescriptor;
 import java.lang.foreign.MemorySegment;
 import java.lang.foreign.SymbolLookup;
 import java.lang.invoke.MethodHandle;
 
+import static java.lang.foreign.ValueLayout.ADDRESS;
 import static java.lang.foreign.ValueLayout.JAVA_LONG;
 
 /**
@@ -19,22 +21,22 @@ import static java.lang.foreign.ValueLayout.JAVA_LONG;
  */
 public final class Metal {
     private static final SymbolLookup FRAMEWORK = ObjC.framework("Metal");
-    private static final MethodHandle MH_MTLCreateSystemDefaultDevice = ObjC.LINKER.downcallHandle(
-            FRAMEWORK.findOrThrow("MTLCreateSystemDefaultDevice"), FunctionDescriptor.of(JAVA_LONG));
-    private static final MethodHandle MH_MTLCopyAllDevices = ObjC.LINKER.downcallHandle(
-            FRAMEWORK.findOrThrow("MTLCopyAllDevices"), FunctionDescriptor.of(JAVA_LONG));
-    private static final MethodHandle MH_MTLCopyAllDevicesWithObserver = ObjC.LINKER.downcallHandle(
-            FRAMEWORK.findOrThrow("MTLCopyAllDevicesWithObserver"), FunctionDescriptor.of(JAVA_LONG, JAVA_LONG, JAVA_LONG));
-    private static final MethodHandle MH_MTLRemoveDeviceObserver = ObjC.LINKER.downcallHandle(
-            FRAMEWORK.findOrThrow("MTLRemoveDeviceObserver"), FunctionDescriptor.ofVoid(JAVA_LONG));
-    private static final MethodHandle MH_MTLIOCompressionContextDefaultChunkSize = ObjC.LINKER.downcallHandle(
-            FRAMEWORK.findOrThrow("MTLIOCompressionContextDefaultChunkSize"), FunctionDescriptor.of(JAVA_LONG));
-    private static final MethodHandle MH_MTLIOCreateCompressionContext = ObjC.LINKER.downcallHandle(
-            FRAMEWORK.findOrThrow("MTLIOCreateCompressionContext"), FunctionDescriptor.of(JAVA_LONG, JAVA_LONG, JAVA_LONG, JAVA_LONG));
-    private static final MethodHandle MH_MTLIOCompressionContextAppendData = ObjC.LINKER.downcallHandle(
-            FRAMEWORK.findOrThrow("MTLIOCompressionContextAppendData"), FunctionDescriptor.ofVoid(JAVA_LONG, JAVA_LONG, JAVA_LONG));
-    private static final MethodHandle MH_MTLIOFlushAndDestroyCompressionContext = ObjC.LINKER.downcallHandle(
-            FRAMEWORK.findOrThrow("MTLIOFlushAndDestroyCompressionContext"), FunctionDescriptor.of(JAVA_LONG, JAVA_LONG));
+    private static final MethodHandle MH_MTLCreateSystemDefaultDevice = bind(
+            "MTLCreateSystemDefaultDevice", FunctionDescriptor.of(JAVA_LONG));
+    private static final MethodHandle MH_MTLCopyAllDevices = bind(
+            "MTLCopyAllDevices", FunctionDescriptor.of(JAVA_LONG));
+    private static final MethodHandle MH_MTLCopyAllDevicesWithObserver = bind(
+            "MTLCopyAllDevicesWithObserver", FunctionDescriptor.of(JAVA_LONG, JAVA_LONG, JAVA_LONG));
+    private static final MethodHandle MH_MTLRemoveDeviceObserver = bind(
+            "MTLRemoveDeviceObserver", FunctionDescriptor.ofVoid(JAVA_LONG));
+    private static final MethodHandle MH_MTLIOCompressionContextDefaultChunkSize = bind(
+            "MTLIOCompressionContextDefaultChunkSize", FunctionDescriptor.of(JAVA_LONG));
+    private static final MethodHandle MH_MTLIOCreateCompressionContext = bind(
+            "MTLIOCreateCompressionContext", FunctionDescriptor.of(JAVA_LONG, JAVA_LONG, JAVA_LONG, JAVA_LONG));
+    private static final MethodHandle MH_MTLIOCompressionContextAppendData = bind(
+            "MTLIOCompressionContextAppendData", FunctionDescriptor.ofVoid(JAVA_LONG, JAVA_LONG, JAVA_LONG));
+    private static final MethodHandle MH_MTLIOFlushAndDestroyCompressionContext = bind(
+            "MTLIOFlushAndDestroyCompressionContext", FunctionDescriptor.of(JAVA_LONG, JAVA_LONG));
 
     public static final long MTL4CommandQueueErrorDomain = ObjC.loadSymbol(FRAMEWORK, "MTL4CommandQueueErrorDomain");
     public static final long MTLBinaryArchiveDomain = ObjC.loadSymbol(FRAMEWORK, "MTLBinaryArchiveDomain");
@@ -79,6 +81,9 @@ public final class Metal {
      */
     @Nullable
     public static MTLDevice MTLCreateSystemDefaultDevice() {
+        if (MH_MTLCreateSystemDefaultDevice == null) {
+            return null;
+        }
         try {
             long result = (long) MH_MTLCreateSystemDefaultDevice.invokeExact();
             return result == 0L ? null : new MTLDevice(result);
@@ -92,6 +97,9 @@ public final class Metal {
      * <p>Returns a retained (+1) object, release it when done.
      */
     public static NSArray<MTLDevice> MTLCopyAllDevices() {
+        if (MH_MTLCopyAllDevices == null) {
+            return copyDefaultDeviceArray();
+        }
         try {
             long result = (long) MH_MTLCopyAllDevices.invokeExact();
             return new NSArray<>(result, MTLDevice::new);
@@ -105,6 +113,9 @@ public final class Metal {
      * <p>Returns a retained (+1) object, release it when done.
      */
     public static NSArray<MTLDevice> MTLCopyAllDevicesWithObserver(final NSObject observer, final long handler) {
+        if (MH_MTLCopyAllDevicesWithObserver == null) {
+            return copyDefaultDeviceArray();
+        }
         try {
             long result = (long) MH_MTLCopyAllDevicesWithObserver.invokeExact(observer.handle(), handler);
             return new NSArray<>(result, MTLDevice::new);
@@ -115,6 +126,9 @@ public final class Metal {
 
     /** {@code MTLRemoveDeviceObserver()} */
     public static void MTLRemoveDeviceObserver(final NSObject observer) {
+        if (MH_MTLRemoveDeviceObserver == null) {
+            return;
+        }
         try {
             MH_MTLRemoveDeviceObserver.invokeExact(observer.handle());
         } catch (Throwable throwable) {
@@ -122,10 +136,37 @@ public final class Metal {
         }
     }
 
+    private static NSArray<MTLDevice> copyDefaultDeviceArray() {
+        NSArray<MTLDevice> array = NSArray.alloc(MTLDevice::new);
+        MTLDevice device = MTLCreateSystemDefaultDevice();
+        if (device == null) {
+            return array.init();
+        }
+        try (Arena arena = Arena.ofConfined()) {
+            MemorySegment objects = arena.allocate(ADDRESS, 1L);
+            objects.set(ADDRESS, 0L, MemorySegment.ofAddress(device.handle()));
+            return array.initWithObjects(objects, 1L);
+        }
+    }
+
+    @Nullable
+    private static MethodHandle bind(final String name, final FunctionDescriptor descriptor) {
+        return FRAMEWORK.find(name)
+                .map(symbol -> ObjC.LINKER.downcallHandle(symbol, descriptor))
+                .orElse(null);
+    }
+
+    private static MethodHandle require(@Nullable final MethodHandle handle, final String name) {
+        if (handle == null) {
+            throw new UnsupportedOperationException("Metal symbol unavailable: " + name);
+        }
+        return handle;
+    }
+
     /** {@code MTLIOCompressionContextDefaultChunkSize()} */
     public static long MTLIOCompressionContextDefaultChunkSize() {
         try {
-            return (long) MH_MTLIOCompressionContextDefaultChunkSize.invokeExact();
+            return (long) require(MH_MTLIOCompressionContextDefaultChunkSize, "MTLIOCompressionContextDefaultChunkSize").invokeExact();
         } catch (Throwable throwable) {
             throw new AssertionError(throwable);
         }
@@ -134,7 +175,7 @@ public final class Metal {
     /** {@code MTLIOCreateCompressionContext()} */
     public static MemorySegment MTLIOCreateCompressionContext(final MemorySegment path, final MTLIOCompressionMethod type, final long chunkSize) {
         try {
-            return MemorySegment.ofAddress((long) MH_MTLIOCreateCompressionContext.invokeExact(path.address(), type.value, chunkSize));
+            return MemorySegment.ofAddress((long) require(MH_MTLIOCreateCompressionContext, "MTLIOCreateCompressionContext").invokeExact(path.address(), type.value, chunkSize));
         } catch (Throwable throwable) {
             throw new AssertionError(throwable);
         }
@@ -143,7 +184,7 @@ public final class Metal {
     /** {@code MTLIOCompressionContextAppendData()} */
     public static void MTLIOCompressionContextAppendData(final MemorySegment context, final MemorySegment data, final long size) {
         try {
-            MH_MTLIOCompressionContextAppendData.invokeExact(context.address(), data.address(), size);
+            require(MH_MTLIOCompressionContextAppendData, "MTLIOCompressionContextAppendData").invokeExact(context.address(), data.address(), size);
         } catch (Throwable throwable) {
             throw new AssertionError(throwable);
         }
@@ -152,7 +193,7 @@ public final class Metal {
     /** {@code MTLIOFlushAndDestroyCompressionContext()} */
     public static MTLIOCompressionStatus MTLIOFlushAndDestroyCompressionContext(final MemorySegment context) {
         try {
-            return MTLIOCompressionStatus.of((long) MH_MTLIOFlushAndDestroyCompressionContext.invokeExact(context.address()));
+            return MTLIOCompressionStatus.of((long) require(MH_MTLIOFlushAndDestroyCompressionContext, "MTLIOFlushAndDestroyCompressionContext").invokeExact(context.address()));
         } catch (Throwable throwable) {
             throw new AssertionError(throwable);
         }

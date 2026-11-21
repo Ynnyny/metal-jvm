@@ -1786,6 +1786,11 @@ public class MTLDevice extends NSObject {
         }
     }
 
+    /** Whether this OS/driver exposes {@code recommendedMaxWorkingSetSize} (iOS 16+). */
+    public boolean supportsRecommendedMaxWorkingSetSize() {
+        return this.respondsToSelector(SEL_recommendedMaxWorkingSetSize);
+    }
+
     /** {@code -[MTLDevice recommendedMaxWorkingSetSize]} */
     public long recommendedMaxWorkingSetSize() {
         try {

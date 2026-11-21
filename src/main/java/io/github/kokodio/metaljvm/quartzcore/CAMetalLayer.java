@@ -312,6 +312,11 @@ public class CAMetalLayer extends CALayer {
         }
     }
 
+    /** Whether this OS exposes {@code displaySyncEnabled} (MetalBridgeKit provides it on older macOS). */
+    public boolean supportsDisplaySyncEnabled() {
+        return this.respondsToSelector(SEL_setDisplaySyncEnabled_);
+    }
+
     /** {@code -[CAMetalLayer displaySyncEnabled]} */
     public boolean displaySyncEnabled() {
         try {
